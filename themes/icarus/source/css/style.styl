@@ -1,4 +1,4 @@
-family-sans ="SimHei", "Ubuntu", "Roboto", "Open Sans", "Microsoft YaHei", sans-serif
+family-sans = "Ubuntu", "Roboto", "Open Sans", "Microsoft YaHei", sans-serif
 family-mono = "Source Code Pro", monospace, "Microsoft YaHei"
 gap = 64px
 screen-tablet = 769px
@@ -10,28 +10,26 @@ screen-fullhd = 1472px
  *       Override CSS Framework
  * --------------------------------- */
 html
-    font-size: 12px
+    font-size: 14px
 
 body
-    background-color: #F7F7F7
+    background-color: #f7f7f7
 
-body, input, select, textarea
+body, button, input, select, textarea
     font-family: family-sans
-
-button
-    font-family: family-sans
-    background-color: #00a99d
-
-a {
-    color: #00a99d
-}
 
 @media screen and (min-width: screen-widescreen)
     .is-1-column .container
     .is-2-column .container
         max-width: screen-desktop - 2 * gap
         width: screen-desktop - 2 * gap
+    .is-3-column .container
+        max-width: screen-widescreen - gap
+        width: screen-widescreen - gap
 @media screen and (min-width: screen-fullhd)
+    .is-3-column .container
+        max-width: screen-fullhd - 2 * gap
+        width: screen-fullhd - 2 * gap
     .is-2-column .container
         max-width: screen-widescreen - 2 * gap
         width: screen-widescreen - 2 * gap
@@ -59,12 +57,13 @@ a {
 
 .tag
     &.is-grey
-        background: #00A99D
+        background: #e7e7e7
 
 .card
-    background-color: white
     border-radius: 4px
-    box-shadow: 0 4px 10px rgba(255,255,255,1), 0 0 1px rgba(255,255,255,1)
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05), 0 0 1px rgba(0,0,0,0.1)
+    &:hover
+        box-shadow: 0 6px 15px rgba(0,0,0,0.15), 0 0 1px rgba(0,0,0,0.1)
     & + .card,
     & + .column-right-shadow
         margin-top: 1.5rem
@@ -84,17 +83,17 @@ img.thumbnail
 .navbar-logo,
 .footer-logo
     img
-        max-height: 4rem
+        max-height: 2.5rem
 
 .navbar-main
-    background-color: white
-    box-shadow: 0 4px 10px rgba(255, 255, 255, 1)
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05)
     .navbar-menu,
     .navbar-start,
     .navbar-end
         align-items: stretch
         display: flex
         padding: 0
+        flex-shrink: 0
     .navbar-menu
         flex-grow: 1
         flex-shrink: 0
@@ -109,8 +108,10 @@ img.thumbnail
         display: flex
         align-items: center
         padding: 1.25rem 0.75rem
+        &.navbar-logo
+            padding: 0
         &.is-active
-            color: #00a99d
+            color: hsl(217, 71%, 53%)
             background-color: transparent
     @media screen and (max-width: screen-desktop - 1)
         .navbar-menu
@@ -123,7 +124,7 @@ img.thumbnail
 
 .footer
     background: white
-    box-shadow: 0 4px 10px rgba(255, 255, 255, 1)
+    padding: 1.5rem
     .field
         .button
             background: transparent
@@ -135,27 +136,22 @@ img.thumbnail
         margin-top: 0
     .menu-list li ul
         margin-right: 0
+    .menu-list a
+        transition: background-color 0.3s ease-in-out
     .menu-list a.level
         display: flex
 
 .pagination
     .pagination-link:not(.is-current), .pagination-previous, .pagination-next
-        background-color: #00a99d
+        background: white
         border: none
     .pagination-link, .pagination-previous, .pagination-next
-        box-shadow: 0 4px 10px rgba(0, 169, 157, 0.05)
-        .is-current {
-            background-color: #00A99d;
-            border-color: #00a99d;
-            color: #fff;
-        }
-
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05)
 
 .post-navigation
     justify-content: space-around
     .level-item
         margin-bottom: 0
-        color: #00a99d
 
 .timeline
     margin-left: 1rem
@@ -174,7 +170,7 @@ img.thumbnail
             width: 9px
             height: 9px
             top: 1.3rem
-            background: #00a99d
+            background: hsl(0, 0%, 86%)
             border-radius: 50%
         &:first-child:before
             top: 0.3rem
@@ -182,28 +178,31 @@ img.thumbnail
             top: calc(1.3rem + 9px)
             width: 9px
             bottom: 0
-            background: #00a99d
+            background: white
         &:first-child:last-child:after
             top: calc(0.3rem + 9px)
 
 .article
+    padding: 1.5rem 1.8rem
     .article-meta
-        margin-bottom: 0.5rem !important
+        margin-bottom: 1.5rem !important
+        >:first-child
+            flex-wrap: wrap
+            width: 100%
+            >*
+                flex-grow: 0 !important
+    .title
+        margin: 0 0 0.5rem -0.1rem
+        .fas
+            margin-right: 0.5rem
     .content
         font-size: 1.1rem
+        letter-spacing: 0.02rem
         blockquote.pullquote
             float: right
-            max-width: 80%
+            max-width: 50%
             font-size: 1.15rem
             position: relative
-
-    .post-copyright {
-        margin: 2em 0 0;
-        padding: 0.5em 1em;
-        border-left: 3px solid #00a99d;
-        background-color: #ff935700;
-        list-style: none;
-    }
 
 .rtl
      direction: rtl
@@ -256,7 +255,7 @@ img.thumbnail
         right: 0
         bottom: 0
         z-index: 99
-        background: #00a99d
+        background: rgba(0, 0, 0, 0.7)
     #toc,
     #toc-mask
         &.is-active
@@ -283,6 +282,8 @@ img.thumbnail
 
 .is-overflow-x-auto
     overflow-x: auto !important
+    &::-webkit-scrollbar
+        width:0 !important
 
 .is-flex-grow
     flex-grow: 1 !important
@@ -321,13 +322,13 @@ img.thumbnail
 .has-link-black-ter
     transition: 0.2s ease
     &:hover
-        color: #00a99d !important
+        color: hsl(217, 71%, 53%) !important
 
 .has-link-grey
-    color: #00a99d !important
+    color: hsl(0, 0%, 48%) !important
 
 .has-link-black-ter
-    color: #00a99d !important
+    color: hsl(0, 0%, 14%) !important
 
 @media screen and (max-width: screen-tablet - 1)
     .has-text-centered-mobile
@@ -342,7 +343,6 @@ img.thumbnail
  * --------------------------------- */
 .fa, .fab, .fal, .far, .fas
     line-height: inherit
-    background: transparent
 
 /* ---------------------------------
  *        Fix content elements
@@ -350,10 +350,8 @@ img.thumbnail
 .content
     h1, h2, h3, h4, h5, h6
         font-weight: 400
-        font-family: "黑体"
     h1
         font-size: 1.75em
-        color: #00A99C
     h2
         font-size: 1.5em
     h3
@@ -363,7 +361,7 @@ img.thumbnail
     h5
         font-size: 1em
     code, pre
-        font-size: 0.85em
+        font-size: 0.95em
         font-family: family-mono
     code
         color: hsl(348, 100%, 61%)
@@ -400,7 +398,7 @@ figure.highlight
 
     figcaption,
     .gutter
-        background: #00a99d
+        background: rgba(200, 200, 200, 0.15)
 
     figcaption
         padding: .3em .75em
@@ -414,7 +412,7 @@ figure.highlight
 
         a
             float: right
-            color: #00a99d
+            color: #9a9a9a
 
     .gutter
         text-align: right
@@ -433,7 +431,6 @@ figure.highlight
         vertical-align: inherit
         min-width: inherit
         border-radius: inherit
-        color: #00a99d
 
     .copy
         display: none
@@ -444,6 +441,23 @@ figure.highlight
         background: rgba(0, 0, 0, 0.5)
     &:hover .copy
         display: block
+
+/* ---------------------------------
+ *        Fix Video
+ * --------------------------------- */
+.video-container {
+	position: relative;
+	padding-bottom: 56.25%;
+	padding-top: 25px;
+	height: 0;
+}
+.video-container iframe {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+}
 
 /* ---------------------------------
  *        Fix Gist Snippet
@@ -457,10 +471,19 @@ figure.highlight
     .file
         all: initial
 
-/* ---------------------------------
- *        鼠标点击烟花效果
- * --------------------------------- */
-.fireworks
-    position: fixed
-    z-index: -1
-    pointer-events: none
+.post-copyright
+    font-size: 1rem
+    letter-spacing: 0.02rem
+    word-break: break-all
+    margin: 2.5rem 0 0
+    padding: 1rem 1rem
+    border-left: 3px solid #FF1700
+    background-color: #F9F9F9
+
+.article {counter-reset:section}
+.article h2{counter-reset:sub-section}
+.article h3{counter-reset:composite}
+.article h4{counter-reset:detail}
+.article h2:before{content:counter(section) " ";counter-increment:section}
+.article h3:before{content:counter(section) "." counter(sub-section) " ";counter-increment:sub-section}
+.article h4:before{content:counter(section) "." counter(sub-section) "." counter(composite) " ";counter-increment:composite}
